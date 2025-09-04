@@ -20,6 +20,7 @@
             padding: 25px 40px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative; /* Thêm thuộc tính này để định vị nút loa */
         }
         h1, h2, h3 {
             color: #212529;
@@ -29,6 +30,7 @@
             text-align: center;
             font-size: 1.9em;
             margin-bottom: 5px;
+            padding-right: 40px; /* Tạo không gian cho nút loa */
         }
         .subtitle {
             text-align: center;
@@ -56,7 +58,7 @@
             padding-left: 0;
         }
         li {
-           margin-bottom: 10px;
+            margin-bottom: 10px;
         }
         li::before {
             content: "-";
@@ -82,11 +84,33 @@
         strong {
             color: #c82333;
         }
+
+        /* --- CSS CHO NÚT BẤM NHẠC NỀN --- */
+        .music-toggle-btn {
+            position: absolute;
+            top: 35px;
+            right: 40px;
+            background: none;
+            border: none;
+            font-size: 1.8em; /* Kích thước icon loa */
+            cursor: pointer;
+            color: #6c757d;
+            transition: transform 0.2s ease;
+        }
+        .music-toggle-btn:hover {
+            transform: scale(1.1); /* Hiệu ứng khi di chuột qua */
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <button id="music-toggle" class="music-toggle-btn">🔈</button>
+        <audio id="background-music" loop>
+            <source src="https://github.com/Dhr-PhucThanh/Samatha-Samapatti-Dhyana-THIEN-QUAN-CHI/blob/main/Om%20Mani%20Padme%20Hum.m4a" type="audio/mp4">
+            Trình duyệt của bạn không hỗ trợ phát âm thanh.
+        </audio>
+
         <h1>ỨNG DỤNG NĂNG LƯỢNG SỐNG TRONG CÁC KỸ THUẬT THỰC HÀNH THIỀN, THIỀN QUÁN VÀ THIỀN CHỈ [*]</h1>
         <p class="subtitle">(PHẦN III)</p>
 
@@ -152,7 +176,23 @@
         </div>
     </div>
 
+    <script>
+        const musicToggle = document.getElementById('music-toggle');
+        const backgroundMusic = document.getElementById('background-music');
+
+        musicToggle.addEventListener('click', function() {
+            // Kiểm tra xem nhạc đang dừng hay đang phát
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                // Thay đổi icon thành loa đang bật
+                this.innerHTML = '🔊';
+            } else {
+                backgroundMusic.pause();
+                // Thay đổi icon thành loa đã tắt
+                this.innerHTML = '🔈';
+            }
+        });
+    </script>
+
 </body>
 </html>
-
-
